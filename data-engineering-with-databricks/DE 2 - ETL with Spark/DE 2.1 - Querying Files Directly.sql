@@ -198,7 +198,7 @@ SELECT * FROM events_temp_view
 
 WITH cte_json
 AS (SELECT * FROM json.`${DA.paths.kafka_events}`)
-SELECT * FROM cte_json
+SELECT count(*) FROM cte_json
 
 -- COMMAND ----------
 
@@ -210,7 +210,7 @@ SELECT * FROM cte_json
 
 -- COMMAND ----------
 
--- SELECT COUNT(*) FROM cte_json
+--SELECT COUNT(*) FROM cte_json
 
 -- COMMAND ----------
 
