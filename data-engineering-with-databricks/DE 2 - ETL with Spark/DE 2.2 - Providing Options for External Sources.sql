@@ -77,7 +77,7 @@ SELECT * FROM csv.`${DA.paths.sales_csv}`
 -- MAGIC
 -- MAGIC <strong><code>
 -- MAGIC CREATE TABLE table_identifier (col_name1 col_type1, ...)<br/>
--- MAGIC USING data_source<br/>
+-- MAGIC USING data_source_format<br/>
 -- MAGIC OPTIONS (key1 = val1, key2 = val2, ...)<br/>
 -- MAGIC LOCATION = path<br/>
 -- MAGIC </code></strong>
@@ -283,6 +283,10 @@ OPTIONS (
 -- COMMAND ----------
 
 SELECT * FROM users_jdbc
+
+-- COMMAND ----------
+
+SELECT COUNT(*) FROM users_jdbc 
 
 -- COMMAND ----------
 
