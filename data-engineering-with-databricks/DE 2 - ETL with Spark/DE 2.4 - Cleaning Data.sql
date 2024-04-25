@@ -96,7 +96,7 @@ SELECT count(*) FROM users_dirty WHERE email IS NULL;
 -- MAGIC from pyspark.sql.functions import col
 -- MAGIC usersDF = spark.read.table("users_dirty")
 -- MAGIC
--- MAGIC usersDF.selectExpr("count_if(email IS NULL)")
+-- MAGIC #usersDF.selectExpr("count_if(email IS NULL)")
 -- MAGIC usersDF.where(col("email").isNull()).count()
 
 -- COMMAND ----------
@@ -142,6 +142,11 @@ SELECT count(*) FROM deduped_users
 
 -- COMMAND ----------
 
+SELECT * FROM deduped_users
+SORT BY user_id
+
+-- COMMAND ----------
+
 -- MAGIC %python
 -- MAGIC from pyspark.sql.functions import max
 -- MAGIC dedupedDF = (usersDF
@@ -152,6 +157,30 @@ SELECT count(*) FROM deduped_users
 -- MAGIC     )
 -- MAGIC
 -- MAGIC dedupedDF.count()
+
+-- COMMAND ----------
+
+SELECT  COUNT(DISTINCT(user_id)) FROM users_dirty
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC ### **ATT!** Always use *COUNT(DISTINCT(col))*
+-- MAGIC ##### SELECT DISTINCT(COUNT(user_id)) FROM users_dirty == SELECT DISTINCT res  FROM (SELECT COUNT(id) AS res FROM users_dirty) == SELECT DISTINCT 983 == 983
+-- MAGIC ##### it is different from
+-- MAGIC ##### SELECT COUNT(DISTINCT(user_id)) FROM users_dirty == SELECT COUNT(user_id) FROM <result of a table with 918 rows of which 917 non null and 1 null> 
+
+-- COMMAND ----------
+
+SELECT DISTINCT(COUNT(user_id)) FROM users_dirty
+
+-- COMMAND ----------
+
+SELECT DISTINCT(user_id) FROM users_dirty
+
+-- COMMAND ----------
+
+SELECT DISTINCT 983
 
 -- COMMAND ----------
 
