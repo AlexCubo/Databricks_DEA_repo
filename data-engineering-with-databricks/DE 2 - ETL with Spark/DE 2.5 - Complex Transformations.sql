@@ -41,6 +41,11 @@
 
 -- COMMAND ----------
 
+select * from events_raw 
+limit 10
+
+-- COMMAND ----------
+
 -- DBTITLE 0,--i18n-a6be8b8a-1c1f-40dd-a71c-8e91ae079b5c
 -- MAGIC %md
 -- MAGIC
@@ -230,6 +235,7 @@ INNER JOIN item_lookup b
 ON a.item.item_id = b.item_id;
 
 SELECT * FROM item_purchases
+ORDER BY order_id
 
 -- COMMAND ----------
 
